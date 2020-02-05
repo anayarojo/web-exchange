@@ -1,6 +1,6 @@
 # Web Exchange
 
-## Comands
+### Comandos
 
 Comando para instalar `Vue CLI`.
 ```bash
@@ -43,4 +43,4 @@ vue add @ianaya89/tailwind
 npm install vue-router --save
 ```
 
-Ver [Documentación](https://cli.vuejs.org/config/).
+Ver [Documentación](https://cli.vuejs.org/config/)
