@@ -1,6 +1,8 @@
 <template>
   <div>
-    <bounce-loader :loading="isLoading" :size="100" :color="'#68d391'" />
+    <div class="flex justify-center">
+      <bounce-loader :loading="isLoading" :size="100" :color="'#68d391'" />
+    </div>
     <px-assets-table v-if="!isLoading" :assets="assets" />
   </div>
 </template>
