@@ -41,6 +41,7 @@ Instalación de paquetes para el proyecto.
 ```bash
 vue add @ianaya89/tailwind
 npm install vue-router --save
+npm install numeral --save
 ```
 
 Ver [Documentación](https://cli.vuejs.org/config/)
