@@ -42,6 +42,9 @@ Instalación de paquetes para el proyecto.
 vue add @ianaya89/tailwind
 npm install vue-router --save
 npm install numeral --save
+npm install vue-spinner --save
+npm install @saeris/vue-spinners --save
+npm install vue-chartkick chart.js --save
 ```
 
 Ver [Documentación](https://cli.vuejs.org/config/)
