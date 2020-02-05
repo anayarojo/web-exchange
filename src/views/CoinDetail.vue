@@ -77,6 +77,7 @@ export default {
 
   data() {
     return {
+      isLoading: false,
       asset: {},
       history: [],
     };
@@ -103,6 +104,7 @@ export default {
   },
 
   created() {
+    this.isLoading = true;
     this.getCoin();
   },
 
