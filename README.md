@@ -1,24 +1,30 @@
-# web-exchange
+# Web Exchange
 
-## Project setup
+## Comands
+
+Comando para instalar Vue CLI
+```bash
+npm install -g @vue/cli
 ```
+
+Comando para crear proyecto Vue.
+```bash
+vue create <project_name>
+```
+
+Comando para instalar los paquetes de node.
+```bash
 npm install
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
+Comando para listar y arreglar `lints`.
+```bash
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Comando para generar los assets del proyecto.
+```bash
+npm run build
+```
+
+Ver [Documentación](https://cli.vuejs.org/config/).
