@@ -50,22 +50,25 @@
 
         <div class="my-10 sm:mt-0 flex flex-col justify-center text-center">
           <button
+            @click="toggleConverter"
             class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
           >
-            Cambiar
+            {{ fromUsd ? `USD a ${asset.symbol}` : `${asset.symbol} a USD` }}
           </button>
 
           <div class="flex flex-row my-5">
             <label class="w-full" for="convertValue">
               <input
-                id="convertValue"
                 type="number"
+                id="convertValue"
+                v-model="convertedValue"
+                :placeholder="`Valor en ${fromUsd ? 'USD' : asset.symbol}`"
                 class="text-center bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
               />
             </label>
           </div>
 
-          <span class="text-xl"></span>
+          <span class="text-xl">{{ convertResult }}</span>
         </div>
       </div>
       <line-chart
@@ -94,7 +97,7 @@
               v-if="!m.url"
               @custom-click="getWebSite(m)"
             >
-              <slot>Obtener Link</slot>
+              Obtener Link
             </px-button>
 
             <a v-else class="hover:underline text-green-600" target="_blanck">
@@ -109,9 +112,14 @@
 
 <script>
 import api from '@/api';
+import PxButton from '@/components/PxButton';
 
 export default {
   name: 'CoinDetail',
+
+  components: {
+    PxButton,
+  },
 
   data() {
     return {
@@ -119,10 +127,22 @@ export default {
       asset: {},
       history: [],
       markets: [],
+      fromUsd: true,
+      convertedValue: null,
     };
   },
 
   computed: {
+    convertResult() {
+      if (!this.convertedValue) {
+        return 0;
+      }
+      const result = this.fromUsd
+        ? this.convertedValue / this.asset.priceUsd
+        : this.convertedValue * this.asset.priceUsd;
+      return result.toFixed(4);
+    },
+
     min() {
       return Math.min(
         ...this.history.map((h) => parseFloat(h.priceUsd).toFixed(2))
@@ -142,11 +162,20 @@ export default {
     },
   },
 
+  watch: {
+    $route() {
+      this.getCoin();
+    },
+  },
+
   created() {
     this.getCoin();
   },
 
   methods: {
+    toggleConverter() {
+      this.fromUsd = !this.fromUsd;
+    },
     getWebSite(exchange) {
       this.$set(exchange, 'isLoading', true);
 
@@ -163,10 +192,15 @@ export default {
       const id = this.$route.params.id;
       this.isLoading = true;
 
-      Promise.all([api.getAsset(id), api.getAssetHistory(id)])
-        .then(([asset, history]) => {
+      Promise.all([
+        api.getAsset(id),
+        api.getAssetHistory(id),
+        api.getMarkets(id),
+      ])
+        .then(([asset, history, markets]) => {
           this.asset = asset;
           this.history = history;
+          this.markets = markets;
         })
         .finally(() => {
           this.isLoading = false;
