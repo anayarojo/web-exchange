@@ -1,5 +1,7 @@
 # Web Exchange
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d3b4ce10-bb48-4bf3-9989-0795ffab3de7/deploy-status)](https://app.netlify.com/sites/web-exchange/deploys)
+
 ### Comandos
 
 Comando para instalar `Vue CLI`.
